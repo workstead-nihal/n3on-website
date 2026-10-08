@@ -1,36 +1,43 @@
-# Deployment
+﻿# GitHub Pages and Wix DNS
 
 Source: https://github.com/workstead-nihal/n3on-website
 
-Live site: https://n3ontech.fuzzypin16.chatgpt.site
+Hosting target: GitHub Pages. The previous ChatGPT hosting DNS records must not be used.
 
-Hosting: ChatGPT Sites. GitHub contains the source; GitHub pushes do not automatically deploy to Sites.
+## 1. Configure GitHub first
 
-## Connect Wix DNS
+Open https://github.com/workstead-nihal/n3on-website/settings/pages.
+Pages is configured to use GitHub Actions. The workflow in .github/workflows/pages.yml checks lint and TypeScript, builds the Vite app, and publishes dist on each push to main.
+Set Custom domain to n3ontech.in and save before changing Wix DNS.
+The custom domain is configured as n3ontech.in in GitHub Pages.
 
-Open https://manage.wix.com/account/domains and select n3ontech.in, then Domain Actions > Manage DNS Records.
+## 2. Set Wix DNS
 
-Replace the root A records with the two A records below. Replace the existing www CNAME with the target below. Add all four TXT records. Wix uses a blank host for the root domain. Preserve mail records and other unrelated DNS records.
+Open https://manage.wix.com/account/domains.
+Select n3ontech.in > Domain Actions > Manage DNS Records.
+Replace the existing root A records with these four records. Leave the root Host Name blank in Wix.
+Replace the www CNAME with the record below. Leave TTL at its default.
 
-| Type | Host | Value |
+| Type | Host Name in Wix | Value |
 | --- | --- | --- |
-| A | (blank) | 162.159.143.30 |
-| A | (blank) | 172.66.3.26 |
-| CNAME | www | custom-domains.chatgpt.site |
-| TXT | _openai-site-verification | openai-site-verification=X2eEWSZCENT5KtZrQezphuOGt8lAbSrpQpur4aNHXHI |
-| TXT | _cf-custom-hostname | 040059d1-e3a1-4319-858d-a268a2568791 |
-| TXT | _openai-site-verification.www | openai-site-verification=ha1HYIAThe3VGerdkV5QTqlw-fQc9pdhaoYkXW2l7T4 |
-| TXT | _cf-custom-hostname.www | 68bff37e-5ddd-4525-8953-fa5b36e956a8 |
+| A | (blank) | 185.199.108.153 |
+| A | (blank) | 185.199.109.153 |
+| A | (blank) | 185.199.110.153 |
+| A | (blank) | 185.199.111.153 |
+| CNAME | www | workstead-nihal.github.io |
 
-Reference: https://support.wix.com/en/article/connecting-a-wix-domain-to-an-external-site
+The www value has no https:// prefix and no repository path.
+Public DNS checked on 2026-10-08 via Cloudflare resolves all four GitHub A records and the correct www CNAME. Local DNS caches may still show the previous Wix records.
+If you applied the previous ChatGPT DNS instructions, replace those root A and www CNAME records instead. Its _openai-site-verification and _cf-custom-hostname TXT records are not needed for GitHub Pages.
+Preserve MX, email-related TXT, and unrelated subdomain records.
 
-Domain registration is pending DNS verification and SSL activation. DNS propagation can take up to 48 hours.
+## 3. Finish HTTPS
 
-## Validation
+Save the Wix changes. DNS propagation may take up to 48 hours according to Wix.
+Return to GitHub Settings > Pages. Once the DNS check passes and the certificate is ready, enable Enforce HTTPS.
 
-TypeScript checks and Vite production build passed. Deployment succeeded from source commit 78fda0bcc1879beafeecbb7a2e55a81818fe58ec.
+## References
 
-## Known limits
-
-The contact form has no backend and does not deliver submissions. npm reported 33 dependency vulnerabilities; dependency remediation was outside this deployment change.
+- https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+- https://support.wix.com/en/article/connecting-a-wix-domain-to-an-external-site
 

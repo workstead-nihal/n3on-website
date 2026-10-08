@@ -50,6 +50,8 @@ export function FinalCTA() {
     // Example: await supabase.from('leads').insert(form)
     //          or: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(form) })
     // ============================================================
+    const body = `Name: ${form.name}\nBusiness: ${form.business}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`;
+    window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(`Website enquiry from ${form.business}`)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
 
@@ -88,10 +90,10 @@ export function FinalCTA() {
           {submitted ? (
             <div className="mt-10 flex flex-col items-center justify-center rounded-2xl border border-neon-cyan/30 bg-espresso-700/50 p-8 text-center">
               <CheckCircle size={48} className="mb-4 text-neon-cyan" />
-              <h3 className="font-display text-xl font-semibold text-cream">Message Sent!</h3>
+              <h3 className="font-display text-xl font-semibold text-cream">Email Draft Ready</h3>
               <p className="mt-2 max-w-sm text-sm text-creamDark">
-                Thanks for reaching out. We'll get back to you within 24 hours. For an instant chat,
-                tap the WhatsApp button below.
+                Send the draft in your email app to complete your enquiry. If no app opened,
+                contact us at {siteConfig.contact.email}.
               </p>
               <div className="mt-6">
                 <Button href={whatsappLink} target="_blank" rel="noopener noreferrer" variant="secondary" size="md">
@@ -183,7 +185,7 @@ export function FinalCTA() {
                   type="submit"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-neon-amber px-8 py-4 text-base font-semibold text-espresso-900 transition-all duration-300 hover:bg-neon-amberLight hover:shadow-[0_0_30px_rgba(255,159,28,0.6)] active:scale-95"
                 >
-                  <Send size={16} /> Send Message
+                  <Send size={16} /> Open Email Draft
                 </button>
                 <a
                   href={whatsappLink}

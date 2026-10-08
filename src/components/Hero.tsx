@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Star, QrCode, Zap, TrendingUp } from 'lucide-react';
+import { m as motion } from 'framer-motion';
+import { QrCode, Zap, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export function Hero() {
@@ -12,6 +12,9 @@ export function Hero() {
           alt="Cozy coffee shop interior with warm vintage lighting"
           className="h-full w-full object-cover opacity-20"
           loading="eager"
+          fetchPriority="high"
+          srcSet="https://images.pexels.com/photos/2174069/pexels-photo-2174069.jpeg?auto=compress&cs=tinysrgb&w=768 768w, https://images.pexels.com/photos/2174069/pexels-photo-2174069.jpeg?auto=compress&cs=tinysrgb&w=1920 1920w"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-espresso-900/80 via-espresso-900/90 to-espresso-900" />
         <div className="absolute inset-0 circuit-bg opacity-50" />
