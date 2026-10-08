@@ -141,7 +141,7 @@ export function FinalCTA() {
                       type="tel"
                       value={form.phone}
                       onChange={(e) => update('phone', e.target.value)}
-                      placeholder="+1 (555) 012-3456"
+                      placeholder="+91 98765 43210"
                       className={inputClass(errors.phone)}
                     />
                   }

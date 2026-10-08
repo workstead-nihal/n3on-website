@@ -10,9 +10,9 @@ export const siteConfig = {
   },
 
   contact: {
-    email: 'hello@n3ontech.com',
-    phone: '+1 (555) 012-3456',
-    whatsappNumber: '15550123456', // digits only, used for wa.me links
+    email: 'info@n3ontech.in',
+    phone: '+91 79785 73015',
+    whatsappNumber: '917978573015', // digits only, used for wa.me links
     address: '221B Brew Street, Coffee District, Portland, OR 97201',
     social: {
       instagram: 'https://instagram.com/n3ontech',
